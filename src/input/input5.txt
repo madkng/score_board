@@ -1,0 +1,6 @@
+Bears 2, Wolves 2
+Lions 1, Tigers 0
+Bears 3, Tigers 1
+Lions 2, Wolves 1
+Bears 1, Panthers 0
+Panthers 1, Tigers 1

@@ -1,0 +1,5 @@
+Dragons 1, Unicorns 1
+Phoenix 2, Griffins 0
+Dragons 3, Griffins 1
+Phoenix 1, Unicorns 1
+Dragons 2, Titans 0

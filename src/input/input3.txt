@@ -1,0 +1,7 @@
+Sharks 2, Dolphins 2
+Whales 1, Penguins 0
+Sharks 3, Penguins 1
+Whales 2, Dolphins 1
+Sharks 1, Seals 0
+Dolphins 2, Seals 1
+Penguins 1, Seals 1

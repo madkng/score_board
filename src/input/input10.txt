@@ -1,0 +1,3 @@
+Ninjas 1, Samurais 1
+Ronins 2, Shoguns 0
+Ninjas 3, Shoguns 1

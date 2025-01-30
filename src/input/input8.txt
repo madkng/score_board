@@ -1,0 +1,5 @@
+Gladiators 1, Spartans 1
+Titans 2, Warriors 0
+Gladiators 3, Warriors 1
+Titans 1, Spartans 1
+Gladiators 2, Legends 0

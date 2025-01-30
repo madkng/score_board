@@ -1,0 +1,4 @@
+Knights 1, Kings 1
+Queens 2, Rooks 0
+Knights 3, Rooks 1
+Queens 1, Kings 1
