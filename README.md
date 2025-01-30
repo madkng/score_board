@@ -23,11 +23,10 @@ In this league, a draw is worth 1 point and a win is worth 3 points. A loss is w
 
 ### Running the Application
 1. Save the input data in a text file (e.g., `input.txt`).
-2. Run the script and pipe the input file:
+2. Run the script and redirect the input file:
    ```bash
    python3 scoreboard.py < input.txt
 
-3. You can also use:
+3. You can also pipe the input file:
    ```bash
    cat input.txt | python3 ./scoreboard.py
-
