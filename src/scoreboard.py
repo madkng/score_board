@@ -11,23 +11,21 @@ Teams are ranked by total points (descending) and then alphabetically in case of
 import sys
 from collections import defaultdict
 
-class LeagueRanking:
+class League:
     """
-    A class to manage league rankings based on match results.
+    A class to manage league ranking based on match results.
 
-    The class maintains team points and rankings, processing match results
+    The class maintains team points and ranking, processing match results
     and generating ordered rankings based on points and team names.
 
     Attributes:
         team_points (defaultdict): Dictionary tracking points for each team
-        teams_seen (set): Set of all teams that have participated in matches
     """
     def __init__(self):
         """
-        Constructor for LeagueRanking class
+        Constructor for League class
         """
         self.team_points = defaultdict(int)
-        self.teams_seen = set()
 
     def process_match(self, line: str) -> None:
         """
@@ -44,20 +42,21 @@ class LeagueRanking:
         team1_name, team1_score = team1_info.rsplit(' ', 1)
         team2_name, team2_score = team2_info.rsplit(' ', 1)
 
-        self.teams_seen.add(team1_name)
-        self.teams_seen.add(team2_name)
-
         score1, score2 = int(team1_score), int(team2_score)
 
         if score1 > score2:
             self.team_points[team1_name] += 3
+            self.team_points[team2_name] += 0
+
         elif score2 > score1:
             self.team_points[team2_name] += 3
+            self.team_points[team1_name] += 0
+
         else:
             self.team_points[team1_name] += 1
             self.team_points[team2_name] += 1
 
-    def get_rankings(self):
+    def generate_ranking(self):
         """
         Calculate current league rankings.
 
@@ -67,36 +66,35 @@ class LeagueRanking:
                  Teams with equal points receive the same rank.
 
         Example:
-            >>> league.get_rankings()
+            >>> league.generate_ranking()
             [(1, "Lions", 6), (2, "Snakes", 3), (3, "Eagles", 0)]
         """
-        if not self.teams_seen:
-            return []
 
-        for team in self.teams_seen:
-            if team not in self.team_points:
-                self.team_points[team] = 0
 
-        sorted_teams = sorted(self.team_points.items(), 
+        #Take the team_points dictionary and sort it by points in descending order
+        #If points are equal, sort by team name in ascending order
+        sorted_teams = sorted(self.team_points.items(),
                             key=lambda x: (-x[1], x[0]))
 
         rankings = []
         curr_rank = 1
         prev_points = None
-        same_rank_count = 0
+        #same_rank_count = 0
 
         for i, (team, points) in enumerate(sorted_teams):
             if points != prev_points:
                 curr_rank = i + 1
                 prev_points = points
-                same_rank_count = 1
+                #same_rank_count = 1
             else:
-                same_rank_count += 1
+                pass
+                #same_rank_count += 1
+
             rankings.append((curr_rank, team, points))
 
         return rankings
 
-    def print_rankings(self):
+    def format_ranking(self, ranking):
         """
         Print the current league rankings to standard output.
 
@@ -108,26 +106,30 @@ class LeagueRanking:
             2. Snakes, 3 pts
             3. Eagles, 0 pts
         """
-        for rank, team, points in self.get_rankings():
+        output = ""
+        for rank, team, points in ranking:
             points_text = "pts" if points != 1 else "pt"
-            print(f"{rank}. {team}, {points} {points_text}")
+            output += f"{rank}. {team}, {points} {points_text}\n"
+
+
+        return output.strip()
 
 def process_input(input_lines):
     """
-    Process multiple match results and return a populated LeagueRanking object.
+    Process multiple match results and return a populated Leuague object.
 
     Args:
         input_lines (list): List of strings containing match results,
                            one per line in the format "Team1 Score1, Team2 Score2"
 
     Returns:
-        LeagueRanking: A LeagueRanking object containing processed match results
+        League: A League object containing processed match results
 
     Example:
         >>> lines = ["Lions 3, Snakes 1", "Eagles 1, Lions 1"]
         >>> league = process_input(lines)
     """
-    league = LeagueRanking()
+    league = League()
     for line in input_lines:
         if line.strip():
             league.process_match(line)
@@ -145,7 +147,10 @@ def main():
     """
     input_lines = sys.stdin.readlines()
     league = process_input(input_lines)
-    league.print_rankings()
+    ranking = league.generate_ranking()
+    ranking = league.format_ranking(ranking=ranking)
+
+    print(ranking)
 
 if __name__ == "__main__":
     main()
