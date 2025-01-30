@@ -58,7 +58,7 @@ class League:
 
     def generate_ranking(self):
         """
-        Calculate current league rankings.
+        Calculate and return current league rankings.
 
         Returns:
             list: A list of tuples containing (rank, team_name, points),
@@ -79,16 +79,15 @@ class League:
         rankings = []
         curr_rank = 1
         prev_points = None
-        #same_rank_count = 0
 
         for i, (team, points) in enumerate(sorted_teams):
             if points != prev_points:
                 curr_rank = i + 1
                 prev_points = points
-                #same_rank_count = 1
+
             else:
                 pass
-                #same_rank_count += 1
+
 
             rankings.append((curr_rank, team, points))
 
@@ -100,6 +99,9 @@ class League:
 
         Format: "Rank. Team Name, Points pts"
         Note: Uses "pt" for 1 point and "pts" for other values.
+
+        Returns: A formatted string. See Example output
+        >>> league.format_ranking(ranking)
 
         Example output:
             1. Lions, 6 pts
