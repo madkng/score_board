@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 A module for tracking and displaying rankings in a league based on match results.
 
